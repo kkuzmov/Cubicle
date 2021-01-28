@@ -4,10 +4,10 @@ const router = Router();
 
 
 router.get('/', (req, res)=>{
-    res.render('home');
+    res.render('home', {title: 'Home'});
 })
 router.get('/create', (req, res)=>{
-    res.render('create');
+    res.render('create', {title: 'Create a cube'});
 })
 
 module.exports = router;
