@@ -9,5 +9,8 @@ router.get('/', (req, res)=>{
 router.get('/create', (req, res)=>{
     res.render('create', {title: 'Create a cube'});
 })
+router.get('/details/:productId', (req, res)=>{
+    res.render('details', {title: 'Details'});
+})
 
 module.exports = router;
