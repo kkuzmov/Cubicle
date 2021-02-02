@@ -13,3 +13,8 @@ router.get('*', (req, res)=>{
 })
 
 module.exports = router;
+
+// router използва home controller, ако path започва без нищо - напр. localhost:3000/....
+// router използва product Controller, ако path започва с /products, напр. localhost:3000/products/....
+// router използва рендерира 404, ако пътят не започва с / или /products, т.е. за всички останали.
+// ЧАСТ ОТ EXAM PACKAGE

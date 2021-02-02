@@ -11,3 +11,5 @@ exports.validateProduct = function(req, res, next){
         next()
     }
 }
+
+// MIDDLEWARE, КОЙТО ИГРАЕ РОЛЯ НА ВАЛИДАТОР - ВЕРОЯТНО ЩЕ ОТПАДНЕ ЗА ОКОНЧАТЕЛНИЯ ПРОЕКТ

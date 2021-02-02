@@ -12,3 +12,7 @@ router.get('/about', (req, res) => {
 })
 
 module.exports = router
+
+
+// HOME CONTROLLER - ЗАРЕЖДА HOME И ABOUT PAGES
+// ЧАСТ ОТ EXAM PACKAGE

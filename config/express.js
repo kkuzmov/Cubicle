@@ -15,3 +15,7 @@ function expressConfig(app){
     }));
 }
 module.exports = expressConfig;
+
+// КОНФИГУРАЦИЯ НА EXPRESS И EXPRESS-HANDLEBARS - EXTENSIONS, ПАПКА, В КОЯТО ДА ТЪРСИ VIEWS(ПОД ТЕЗИ ИМЕНА ТРЯБВА ДА СА ПАПКИТЕ!)
+
+// ЧАСТ ОТ EXAM PACKAGE

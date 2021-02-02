@@ -7,6 +7,7 @@ const { validateProduct }= require('../controllers/helpers/productHelper');
 router.get('/', (req, res) => {
     let products = productService.getAll(req.query)
     res.render('home', {title: 'Home', products});
+    // ВЗИМАШ ВСИЧКИ ПРОДУКТИ ОТ БАЗАТА ДАННИ, РЕНДЕРИРА 'home' от папка views и задаваш title и products като параметри
 })
 router.get('/create', (req, res) => {
     res.render('create', {title: 'Create a cube'});
@@ -26,7 +27,8 @@ router.get('/details/:productId', (req, res) => {
 })
 
 
-
+// CONTROLLER ИЗПОЛЗВА ФУНКЦИИТЕ, СЪЗДАДЕНИ В PRODUCTSERVICE ЗА СЪЗДАВАНЕ ИЛИ ИЗВИКВАНЕ НА ВСИЧКИ ПРОДУКТИ
+// ЧАСТ ОТ EXAM PACKAGE
 
 
 module.exports = router;
