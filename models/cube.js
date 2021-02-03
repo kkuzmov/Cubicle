@@ -20,16 +20,12 @@ const cubeSchema = new mongoose.Schema({
         required: true,
         min: 1,
         max: 6,
-    }
+    },
+    accessories:[{
+        type: mongoose.Types.ObjectId,
+        ref: "Accessory"
+    }]
 })
 
 
-// class Cube extends Model{
-//     constructor(id, name, description, imageUrl, level){
-//         this.id = id;
-//         this.name = name;
-//         this.description = description;
-//         this.imageUrl = imageUrl;
-//         this.level = level;
-//     }    
-// }
+module.exports = mongoose.model('Cube', cubeSchema);

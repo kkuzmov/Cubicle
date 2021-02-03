@@ -1,10 +1,12 @@
-const uniqid = require('uniqid'); // библиотека за генериране на уникално ID, няма да е част от exam package, защото mongo генерира свои id
+// const uniqid = require('uniqid'); // библиотека за генериране на уникално ID, няма да е част от exam package, защото mongo генерира свои id
 const Cube = require('../models/cube'); // модел за клас Cube - отпада от exam package заради mongo schema
-const productData = require('../data/productsData'); // взимаш фукнциите, създадени в product data
+// const productData = require('../data/productsData'); // взимаш фукнциите, създадени в product data
 
 
-function getAll(query){
-    let products = Cube.getAll();
+async function getAll(query){
+    // let products = productData.getAll()
+    // let products = Cube.getAll();
+    let products = await Cube.find({}).lean();
     if(query.search){
         products = products.filter(x => x.name.toLowerCase().includes(query.search))
     }
@@ -16,18 +18,12 @@ function getAll(query){
     }
     return products;
 }
-function getOne(id){
-    return Cube.getOne(id);
+async function getOne(id){
+    return Cube.findById(id).lean();
 }
  
 function createCube(data){
-    let cube = new Cube(
-        uniqid(),
-        data.name,
-        data.description,
-        data.imageUrl,
-        data.difficultyLevel
-        );
+    let cube = new Cube(data);
 
 //    return productData.create(cube);
         return cube.save()
