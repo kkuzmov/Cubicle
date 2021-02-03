@@ -1,6 +1,4 @@
-const {
-    Router
-} = require('express');
+const {Router} = require('express');
 const accessoryService = require('../services/accessoryService');
 const router = Router();
 

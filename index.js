@@ -3,8 +3,9 @@ const express = require('express');
 const app = express();
 const config = require('./config/config');
 const expressConfig = require('./config/express');
-const routes = require('./routes');
 const mongoose = require('./config/mongoose');
+const routes = require('./routes');
+
 expressConfig(app);
 mongoose(app);
 
