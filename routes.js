@@ -9,7 +9,7 @@ const router = Router();
 
 router.use('/', homeController);
 router.use('/products', productController);
-router.use('/accessory', accessoryController);
+router.use('/accessories', accessoryController);
 router.get('*', (req, res)=>{
     res.render('404')
 })

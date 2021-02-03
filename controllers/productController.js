@@ -8,7 +8,6 @@ router.get('/', (req, res) => {
     let products = productService.getAll(req.query)
         .then(products => {
             res.render('home', {title: 'Home', products})
-            console.log(products)
         })
         .catch(()=> res.status(500).end())
     // ВЗИМАШ ВСИЧКИ ПРОДУКТИ ОТ БАЗАТА ДАННИ, РЕНДЕРИРА 'home' от папка views и задаваш title и products като параметри
@@ -25,7 +24,6 @@ router.post('/create', validateProduct, (req, res) => {
 router.get('/details/:productId', async (req, res) => {
 
    let product = await productService.getOne(req.params.productId);
-   console.log(product)
     res.render('details', {title: 'Details', product});
 })
 
