@@ -8,9 +8,12 @@ return accessory.save()
 function getAll(){
     return Accessory.find().lean();
 }
-
+function getAllWithout(ids){
+    return Accessory.find({_id: {$nin: ids }}).lean()
+}
 
 module.exports = {
     create,
+    getAllWithout,
     getAll,
 }
