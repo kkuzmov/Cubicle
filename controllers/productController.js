@@ -30,6 +30,7 @@ router.post('/create', validateProduct, (req, res) => {
 router.get('/details/:productId', async (req, res) => {
 
     let product = await productService.getOneWithAccessories(req.params.productId);
+    console.log(product)
     res.render('details', {
         title: 'Details',
         product

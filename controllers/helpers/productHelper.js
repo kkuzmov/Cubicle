@@ -13,3 +13,4 @@ exports.validateProduct = function(req, res, next){
 }
 
 // MIDDLEWARE, КОЙТО ИГРАЕ РОЛЯ НА ВАЛИДАТОР - ВЕРОЯТНО ЩЕ ОТПАДНЕ ЗА ОКОНЧАТЕЛНИЯ ПРОЕКТ
+// NEXT() СЕ ИЗПОЛЗВА, ЗА ДА ПРЕМИНЕ КЪМ СЛЕДВАЩИЯ HANDLER, КОГАТО MIDDLEWARE-ЪТ Е ИЗПЪЛНИЛ ФУНКЦИЯТА СИ
