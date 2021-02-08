@@ -1,31 +1,32 @@
-const {
-    Router
-} = require('express');
+const {Router} = require('express');
 const authService = require('../services/authService');
 const router = Router();
+const cookieName = 'USER_SESSION';
+const isAuthenticated = require('../middlewares/isAuthenticated');
+const isGuest = require('../middlewares/isGuest');
 
 
-router.get('/login', (req, res) => {
+router.get('/login',isGuest, (req, res) => {
     res.render('login')
 })
-router.post('/login', async (req, res)=>{
+router.post('/login',isGuest, async (req, res)=>{
     const {username, password} = req.body;
 
     try {
         let token = await authService.login({username, password})
 
-        res.cookie('USER_SESSION', token);
+        res.cookie(cookieName, token);
         res.redirect('/products')
     } catch (error) {
         res.render('login', {error})
     }
 })
 
-router.get('/register', (req, res) => {
+router.get('/register',isGuest, (req, res) => {
     res.render('register')
 })
 
-router.post('/register', async (req, res) => {
+router.post('/register',isGuest, async (req, res) => {
     const {username, password, repeatPassword } = req.body;
 
     if(password !== repeatPassword){
@@ -40,5 +41,8 @@ router.post('/register', async (req, res) => {
         return;
     }
 })
-
+router.get('/logout', isAuthenticated, (req, res)=>{
+    res.clearCookie(cookieName);
+    res.redirect('/products')
+})
 module.exports = router;

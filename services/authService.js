@@ -2,9 +2,7 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { SECRET } = require('../config/config')
-const {
-    SALT_ROUNDS
-} = require('../config/config');
+const {SALT_ROUNDS} = require('../config/config');
 async function register({
     username,
     password
@@ -23,9 +21,7 @@ async function login({username,password}){
 
     let isMatch = await bcrypt.compare(password, user.password);
     if(!isMatch) throw {message: 'Passwords do not match!'};
-    let token = jwt.sign({_id: user._id}, SECRET)
-
-    console.log(token)
+    let token = jwt.sign({_id: user._id, username: user.username}, SECRET)
 
     return token
 }
