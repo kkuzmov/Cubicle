@@ -33,7 +33,6 @@ router.post('/create', isAuthenticated, validateProduct, (req, res) => {
 router.get('/details/:productId', async (req, res) => {
 
     let product = await productService.getOneWithAccessories(req.params.productId);
-    console.log(product)
     res.render('details', {
         title: 'Details',
         product
@@ -66,6 +65,25 @@ router.post('/:productId/edit', isAuthenticated, validateProduct,(req, res)=>{
 })
 // CONTROLLER ИЗПОЛЗВА ФУНКЦИИТЕ, СЪЗДАДЕНИ В PRODUCTSERVICE ЗА СЪЗДАВАНЕ ИЛИ ИЗВИКВАНЕ НА ВСИЧКИ ПРОДУКТИ
 // ЧАСТ ОТ EXAM PACKAGE
-
+router.get('/:productId/delete', isAuthenticated, (req, res)=>{
+    productService.getOne(req.params.productId)
+        .then(product =>{
+            if(req.user._id != product.creator){
+                res.redirect('/products')
+            }else{
+                res.render('deleteCubePage', product);            
+            }
+        })
+})
+router.post('/:productId/delete', isAuthenticated, (req, res)=>{
+    productService.getOne(req.params.productId)
+        .then(product =>{
+            if(product._id != req.user._id){
+                return res.redirect('/products')
+            }
+            return productService.deleteOne(req.params.productId)
+        })
+        .then(response => res.redirect('/products'))
+})
 
 module.exports = router;
