@@ -20,7 +20,6 @@ async function getAll(query){
 async function getOne(id){
     return Cube.findById(id).lean();
 }
- 
 function createCube(data, userId){
     let cube = new Cube({...data, creator: userId});
 
