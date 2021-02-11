@@ -33,7 +33,7 @@ router.get('/details/:productId', async (req, res) => {
 router.get('/:productId/attach', isAuthenticated, async (req, res) => {
     let product = await productService.getOne(req.params.productId);
     let accessories = await accessoryService.getAllWithout(product.accessories);
-    res.render('attachAccessory', {title: 'Attach an accessory', product, accessories})
+    res.render('attachAccessory', {title: 'Attach an accessory', product, accessories});
 })
 router.post('/:productId/attach', isAuthenticated, (req, res)=>{
     productService.attachAccessory(req.params.productId, req.body.accessory)
@@ -70,7 +70,10 @@ router.get('/:productId/delete', isAuthenticated, (req, res)=>{
 router.post('/:productId/delete', isAuthenticated, (req, res)=>{
     productService.getOne(req.params.productId)
         .then(product =>{
-            if(product._id != req.user._id){
+            console.log(product)
+            console.log(product.creator)
+            console.log(req.user._id)
+            if(product.creator != req.user._id){
                 return res.redirect('/products')
             }
             return productService.deleteOne(req.params.productId)
