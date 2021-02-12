@@ -7,6 +7,7 @@ const cookieName = 'USER_SESSION';
 const isAuthenticated = require('../middlewares/isAuthenticated');
 const isGuest = require('../middlewares/isGuest');
 const validator = require('validator');
+const { check, validationResult } = require('express-validator');
 
 let isStrongPasswordMiddleware = function(req, res, next){
     let password = req.body.password;
@@ -51,19 +52,23 @@ router.get('/register', isGuest, (req, res) => {
     res.render('register')
 })
 
-router.post('/register', isGuest, isStrongPasswordMiddleware, async (req, res) => {
+router.post('/register', isGuest, check('username', 'Specify username').notEmpty(), check('password', 'Password too short!').isLength({min: 6}),  async (req, res) => {
     const {
         username,
         password,
         repeatPassword
     } = req.body;
 
-    
     if (password !== repeatPassword) {
         res.render('register', {
             message: 'Passwords do not match!'
         });
         return;
+    }
+    let errors = validationResult(req)
+
+    if(errors.errors.length > 0){
+        return res.render('register', errors);
     }
     try {
         let user = await authService.register({

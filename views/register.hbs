@@ -8,9 +8,9 @@
 
         <label for="password">Password</label>
         <input type="password" id="password" name="password">
-        {{#if error}}
-        <span class="error">{{error.message}}</span>
-        {{/if}}
+        {{#each errors}}
+        <span class="error">{{msg}}</span>
+        {{/each}}
         <label for="repeatPassword">Re-Password</label>
         <input type="password" id="repeatPassword" name="repeatPassword">
         <input type="submit" value="Register">
