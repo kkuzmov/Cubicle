@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
                 return ENGLISH_ALPHANUMERIC_PATTERN.test(value);
              },
             message: (props)=>{
-                return `Password consist only of english letters and digits`
+                return `Password must consist only of english letters and digits`
             }
         }
     }

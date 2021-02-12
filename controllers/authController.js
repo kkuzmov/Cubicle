@@ -65,29 +65,19 @@ router.post(
     } = req.body;
 
     if (password !== repeatPassword) {
-        res.render('register', {
-            message: 'Passwords do not match!'
-        });
+        res.render('register', {error: {message: 'Passwords do not match!'}});
         return;
-    }
-    console.log(req.body.email)
-    let errors = validationResult(req)
-
-    if(errors.errors.length > 0){
-        return res.render('register', errors);
     }
     try {
         let user = await authService.register({
             username,
             password
         });
-        console.log(user);
 
         res.redirect('/auth/login')
-    } catch (error) {
-        let errors = Object.keys(error.errors).map(x => ({msg: error.errors[x].message}))
-        console.log(errors);
-        res.render('register', {errors})
+    } catch (err) {
+        let error = Object.keys(err.errors).map(x => ({message: err.errors[x].message}))[0];
+        res.render('register', {error})
         return;
     }
 })
