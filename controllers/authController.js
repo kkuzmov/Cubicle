@@ -7,7 +7,7 @@ const cookieName = 'USER_SESSION';
 const isAuthenticated = require('../middlewares/isAuthenticated');
 const isGuest = require('../middlewares/isGuest');
 const validator = require('validator');
-const { check, validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 
 let isStrongPasswordMiddleware = function(req, res, next){
     let password = req.body.password;
@@ -52,7 +52,12 @@ router.get('/register', isGuest, (req, res) => {
     res.render('register')
 })
 
-router.post('/register', isGuest, check('username', 'Specify username').notEmpty(), check('password', 'Password too short!').isLength({min: 6}),  async (req, res) => {
+router.post(
+    '/register',
+    isGuest,
+    // body('email', 'Please use an e-mail for registration').isEmail().normalizeEmail(),
+    // body('username', 'Specify username').notEmpty(), body('password', 'Password too short!').isLength({min: 6}),
+    async (req, res) => {
     const {
         username,
         password,
@@ -65,6 +70,7 @@ router.post('/register', isGuest, check('username', 'Specify username').notEmpty
         });
         return;
     }
+    console.log(req.body.email)
     let errors = validationResult(req)
 
     if(errors.errors.length > 0){
@@ -75,9 +81,13 @@ router.post('/register', isGuest, check('username', 'Specify username').notEmpty
             username,
             password
         });
+        console.log(user);
+
         res.redirect('/auth/login')
     } catch (error) {
-        res.render('register', {error})
+        let errors = Object.keys(error.errors).map(x => ({msg: error.errors[x].message}))
+        console.log(errors);
+        res.render('register', {errors})
         return;
     }
 })
