@@ -70,9 +70,6 @@ router.get('/:productId/delete', isAuthenticated, (req, res)=>{
 router.post('/:productId/delete', isAuthenticated, (req, res)=>{
     productService.getOne(req.params.productId)
         .then(product =>{
-            console.log(product)
-            console.log(product.creator)
-            console.log(req.user._id)
             if(product.creator != req.user._id){
                 return res.redirect('/products')
             }
