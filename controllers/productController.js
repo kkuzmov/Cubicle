@@ -54,8 +54,6 @@ router.post('/:productId/edit', isAuthenticated, validateProduct,(req, res)=>{
             console.log(err)
         })
 })
-// CONTROLLER ИЗПОЛЗВА ФУНКЦИИТЕ, СЪЗДАДЕНИ В PRODUCTSERVICE ЗА СЪЗДАВАНЕ ИЛИ ИЗВИКВАНЕ НА ВСИЧКИ ПРОДУКТИ
-// ЧАСТ ОТ EXAM PACKAGE
 router.get('/:productId/delete', isAuthenticated, (req, res)=>{
     productService.getOne(req.params.productId)
         .then(product =>{

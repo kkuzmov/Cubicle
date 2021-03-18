@@ -28,16 +28,10 @@ router.get('/login', isGuest, (req, res) => {
     res.render('login')
 })
 router.post('/login', isGuest, async (req, res) => {
-    const {
-        username,
-        password
-    } = req.body;
+    const {username,password} = req.body;
 
     try {
-        let token = await authService.login({
-            username,
-            password
-        })
+        let token = await authService.login({username,password})
 
         res.cookie(cookieName, token);
         res.redirect('/products')
